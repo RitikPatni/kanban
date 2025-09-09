@@ -1,0 +1,35 @@
+button,
+a {
+  cursor: pointer;
+  transition: linear 0.2s all;
+}
+button:focus,
+button:hover,
+a :focus,
+a :hover {
+  transform: scale(1.05);
+}
+* {
+  box-sizing: border-box;
+  outline-color: var(--primary);
+}
+body {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text);
+}
+// * Code to stop any animation on website if user has configured his OS settings for reduced motion
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
+  }
+}

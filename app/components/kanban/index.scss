@@ -1,0 +1,9 @@
+.kanban {
+  background: var(--primary-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: auto;
+  padding: 1.5rem 2.25rem;
+  display: flex;
+  gap: 0.5rem;
+}
