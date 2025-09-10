@@ -43,7 +43,7 @@ const Kanban = () => {
       tasks[STATUS_NAME.DONE].length +
       tasks[STATUS_NAME.CANCELLED].length;
     setTotalTasks(total);
-  }, []);
+  }, [tasks]);
   const onAddTaskSubmit = (task: ITask) => {
     const { status } = task;
     const existingTasks: ITask[] = localStorage.getItem(status)
