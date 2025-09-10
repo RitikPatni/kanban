@@ -5,7 +5,7 @@ import type { ITask, TaskStatus } from "~/types";
 import CreateTask from "./create-task";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 import TaskContainer from "./task-container";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Kanban = () => {
   if (typeof window === "undefined") {
@@ -33,13 +33,37 @@ const Kanban = () => {
     done: doneTasks,
     cancelled: cancelledTasks,
   });
-  const totalTasks =
-    tasks.backlog.length +
-    tasks.todo.length +
-    tasks.inProgress.length +
-    tasks.done.length +
-    tasks.cancelled.length;
+  const [totalTasks, setTotalTasks] = useState(0);
+  useEffect(() => {
+    const total =
+      tasks.backlog.length +
+      tasks.todo.length +
+      tasks.inProgress.length +
+      tasks.done.length +
+      tasks.cancelled.length;
+    setTotalTasks(total);
+  }, []);
+  const onAddTaskSubmit = (task: ITask) => {
+    const { status } = task;
+    const existingTasks: ITask[] = localStorage.getItem(status)
+      ? JSON.parse(localStorage.getItem(status) || "")
+      : [];
+    const updatedTasks = [...existingTasks, task];
+    localStorage.setItem(task.status, JSON.stringify(updatedTasks));
+    setTasks((prev) => ({
+      ...prev,
+      [status]: updatedTasks,
+    }));
+    const total =
+      tasks.backlog.length +
+      tasks.todo.length +
+      tasks.inProgress.length +
+      tasks.done.length +
+      tasks.cancelled.length;
+    setTotalTasks(total);
 
+    setShowCreateTask(false);
+  };
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [createTaskStatus, setCreateTaskStatus] =
     useState<TaskStatus>("backlog");
@@ -121,6 +145,7 @@ const Kanban = () => {
         <CreateTask
           status={createTaskStatus}
           closeModal={() => setShowCreateTask(false)}
+          onAddTaskSubmit={onAddTaskSubmit}
         />
       )}
     </DndContext>

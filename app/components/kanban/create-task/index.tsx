@@ -12,8 +12,13 @@ import userIcon from "~/assets/icons/user.svg";
 export interface ICreateTaskProps {
   status: TaskStatus;
   closeModal: () => void;
+  onAddTaskSubmit: (task: ITask) => void;
 }
-const CreateTask = ({ status, closeModal }: ICreateTaskProps) => {
+const CreateTask = ({
+  status,
+  closeModal,
+  onAddTaskSubmit,
+}: ICreateTaskProps) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -38,12 +43,7 @@ const CreateTask = ({ status, closeModal }: ICreateTaskProps) => {
   });
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const existingTasks: ITask[] = localStorage.getItem(status)
-      ? JSON.parse(localStorage.getItem(status) || "")
-      : [];
-    const updatedTasks = [...existingTasks, formData];
-    localStorage.setItem(status, JSON.stringify(updatedTasks));
-    closeModal();
+    onAddTaskSubmit(formData);
   };
   return (
     <div className="create-task">
