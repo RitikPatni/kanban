@@ -55,9 +55,9 @@ const Task = ({
           >
             {id}
           </button>
-          <div className="task__info__left__description">
+          <p className="task__info__left__description">
             {title.length > 120 ? title.slice(0, 120) + "..." : title}
-          </div>
+          </p>
         </div>
         <img
           src={userGrayIcon}
