@@ -35,15 +35,21 @@ const Task = ({
     >
       <div className="task__info">
         <div className="task__info__left">
-          <div className="task__info__left__title">{title}</div>
-          <div className="task__info__left__description">{description}</div>
+          <div className="task__info__left__title">{id}</div>
+          <div className="task__info__left__description">{title}</div>
         </div>
-        <img src={userGrayIcon} alt="User" className="task__info__right" />
+        <img
+          src={userGrayIcon}
+          alt="User"
+          className="task__info__right"
+          title={`Assignee: ${assignee}`}
+        />
       </div>
       <img
         src={priorityMedIcon}
         alt="Priority"
         className="task__priority-icon"
+        title={`Priority: ${priority}`}
       />
     </div>
   );

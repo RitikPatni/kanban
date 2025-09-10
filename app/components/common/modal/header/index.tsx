@@ -3,19 +3,21 @@ import "./index.scss";
 import crossIcon from "~/assets/icons/cross.svg";
 import expandIcon from "~/assets/icons/expand.svg";
 
-const CreateTaskHeader = ({
+const ModalHeader = ({
   closeModal,
   setFullScreen,
+  title,
 }: {
   closeModal: () => void;
   setFullScreen: (value: boolean) => void;
+  title: string;
 }) => {
   return (
-    <header className="create-task-header">
-      <h2 className="create-task-header__title">New Issue</h2>
-      <div className="create-task-header__actions">
+    <header className="modal-header">
+      <h2 className="modal-header__title">{title}</h2>
+      <div className="modal-header__actions">
         <button
-          className="create-task-header__actions__action"
+          className="modal-header__actions__action"
           type="button"
           aria-label="Expand"
           onClick={() => setFullScreen(true)}
@@ -23,7 +25,7 @@ const CreateTaskHeader = ({
           <img src={expandIcon} alt="Expand" />
         </button>
         <button
-          className="create-task-header__actions__action"
+          className="modal-header__actions__action"
           type="button"
           aria-label="Close"
           onClick={closeModal}
@@ -34,4 +36,4 @@ const CreateTaskHeader = ({
     </header>
   );
 };
-export default CreateTaskHeader;
+export default ModalHeader;
