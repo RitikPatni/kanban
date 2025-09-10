@@ -6,9 +6,21 @@ import priorityMedIcon from "~/assets/icons/priority-med.svg";
 import { useDraggable } from "@dnd-kit/core";
 import userGrayIcon from "~/assets/icons/user-gray.svg";
 
-const Task = ({ title, description, priority, assignee }: ITask) => {
+const Task = ({
+  title,
+  description,
+  priority,
+  assignee,
+  id,
+  status,
+  labels,
+}: ITask) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: title,
+    id,
+    data: {
+      type: "task",
+      task: { id, title, description, priority, assignee, status, labels },
+    },
   });
   const style = {
     transform: CSS.Translate.toString(transform),

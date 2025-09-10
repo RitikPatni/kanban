@@ -21,7 +21,7 @@ const TaskContainer = ({
   onAddTask,
 }: ITaskContainerProps) => {
   const { setNodeRef: setDroppableRef } = useDroppable({
-    id: `droppable-${status}`,
+    id: status,
   });
   return (
     <div className="task-container">

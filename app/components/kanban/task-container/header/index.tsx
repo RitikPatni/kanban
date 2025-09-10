@@ -31,15 +31,10 @@ const Header = ({
         ) : null}
         <div className="header__info__title">{statusTitle}</div>
         <div className="header__info__status">
-          {inStatusTasks ? (
-            <>
-              <span className="header__info__status__in-progress">
-                {inStatusTasks || 0}
-              </span>
-              /{" "}
-            </>
-          ) : null}
-          {totalTasks || 0}
+          <span className="header__info__status__in-progress">
+            {inStatusTasks || 0}
+          </span>
+          {inStatusTasks ? `/ ${totalTasks}` : null}
         </div>
       </div>
       <div className="header__actions">
