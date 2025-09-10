@@ -7,6 +7,8 @@ import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 import TaskContainer from "./task-container";
 import { useEffect, useState } from "react";
 import { STATUS_NAME } from "~/constants";
+import ViewTask from "./view-task";
+import mockTasks from "./mock";
 
 const Kanban = () => {
   if (typeof window === "undefined") {
@@ -43,6 +45,29 @@ const Kanban = () => {
       tasks[STATUS_NAME.DONE].length +
       tasks[STATUS_NAME.CANCELLED].length;
     setTotalTasks(total);
+    if (total === 0) {
+      localStorage.setItem(
+        STATUS_NAME.BACKLOG,
+        JSON.stringify(mockTasks[STATUS_NAME.BACKLOG])
+      );
+      localStorage.setItem(
+        STATUS_NAME.TODO,
+        JSON.stringify(mockTasks[STATUS_NAME.TODO])
+      );
+      localStorage.setItem(
+        STATUS_NAME.IN_PROGRESS,
+        JSON.stringify(mockTasks[STATUS_NAME.IN_PROGRESS])
+      );
+      localStorage.setItem(
+        STATUS_NAME.DONE,
+        JSON.stringify(mockTasks[STATUS_NAME.DONE])
+      );
+      localStorage.setItem(
+        STATUS_NAME.CANCELLED,
+        JSON.stringify(mockTasks[STATUS_NAME.CANCELLED])
+      );
+      setTasks(mockTasks);
+    }
   }, [tasks]);
   const onAddTaskSubmit = (task: ITask) => {
     const { status } = task;
@@ -50,7 +75,7 @@ const Kanban = () => {
       ? JSON.parse(localStorage.getItem(status) || "")
       : [];
     const updatedTasks = [...existingTasks, task];
-    localStorage.setItem(task.status, JSON.stringify(updatedTasks));
+    localStorage.setItem(status, JSON.stringify(updatedTasks));
     setTasks((prev) => ({
       ...prev,
       [status]: updatedTasks,
@@ -66,6 +91,8 @@ const Kanban = () => {
     setShowCreateTask(false);
   };
   const [showCreateTask, setShowCreateTask] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<ITask | null>(null);
+
   const [createTaskStatus, setCreateTaskStatus] = useState<TaskStatus>(
     STATUS_NAME.BACKLOG
   );
@@ -121,6 +148,7 @@ const Kanban = () => {
           inStatusTasks={tasks[STATUS_NAME.BACKLOG].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
+          setSelectedTask={setSelectedTask}
         />
         <TaskContainer
           status={STATUS_NAME.TODO}
@@ -128,6 +156,7 @@ const Kanban = () => {
           inStatusTasks={tasks[STATUS_NAME.TODO].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
+          setSelectedTask={setSelectedTask}
         />
         <TaskContainer
           status={STATUS_NAME.IN_PROGRESS}
@@ -135,6 +164,7 @@ const Kanban = () => {
           inStatusTasks={tasks[STATUS_NAME.IN_PROGRESS].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
+          setSelectedTask={setSelectedTask}
         />
         <TaskContainer
           status={STATUS_NAME.DONE}
@@ -142,6 +172,7 @@ const Kanban = () => {
           inStatusTasks={tasks[STATUS_NAME.DONE].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
+          setSelectedTask={setSelectedTask}
         />
         <TaskContainer
           status={STATUS_NAME.CANCELLED}
@@ -149,6 +180,7 @@ const Kanban = () => {
           inStatusTasks={tasks[STATUS_NAME.CANCELLED].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
+          setSelectedTask={setSelectedTask}
         />
       </section>
       {showCreateTask && (
@@ -158,6 +190,12 @@ const Kanban = () => {
           onAddTaskSubmit={onAddTaskSubmit}
         />
       )}
+      {selectedTask ? (
+        <ViewTask
+          task={selectedTask}
+          closeModal={() => setSelectedTask(null)}
+        />
+      ) : null}
     </DndContext>
   );
 };

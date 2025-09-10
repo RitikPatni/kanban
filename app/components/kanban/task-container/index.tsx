@@ -12,6 +12,7 @@ export interface ITaskContainerProps {
   tasks?: ITask[];
   totalTasks?: number;
   onAddTask: (task: TaskStatus) => void;
+  setSelectedTask: (task: ITask | null) => void;
 }
 const TaskContainer = ({
   status,
@@ -19,6 +20,7 @@ const TaskContainer = ({
   tasks,
   totalTasks,
   onAddTask,
+  setSelectedTask,
 }: ITaskContainerProps) => {
   const { setNodeRef: setDroppableRef } = useDroppable({
     id: status,
@@ -33,7 +35,7 @@ const TaskContainer = ({
       />
       <div className="task-container__tasks" ref={setDroppableRef}>
         {tasks?.map((task, index) => (
-          <Task key={index} {...task} />
+          <Task key={index} {...task} setSelectedTask={setSelectedTask} />
         ))}
       </div>
     </div>

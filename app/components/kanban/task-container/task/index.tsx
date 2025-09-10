@@ -6,6 +6,9 @@ import priorityMedIcon from "~/assets/icons/priority-med.svg";
 import { useDraggable } from "@dnd-kit/core";
 import userGrayIcon from "~/assets/icons/user-gray.svg";
 
+interface ITaskProps extends ITask {
+  setSelectedTask: (task: ITask | null) => void;
+}
 const Task = ({
   title,
   description,
@@ -14,12 +17,22 @@ const Task = ({
   id,
   status,
   labels,
-}: ITask) => {
+  setSelectedTask,
+}: ITaskProps) => {
+  const task = {
+    id,
+    title,
+    description,
+    priority,
+    assignee,
+    status,
+    labels,
+  };
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
     data: {
       type: "task",
-      task: { id, title, description, priority, assignee, status, labels },
+      task,
     },
   });
   const style = {
@@ -35,7 +48,13 @@ const Task = ({
     >
       <div className="task__info">
         <div className="task__info__left">
-          <div className="task__info__left__title">{id}</div>
+          <button
+            className="task__info__left__title"
+            onClick={() => setSelectedTask(task)}
+            onPointerDown={(e) => e.stopPropagation()}
+          >
+            {id}
+          </button>
           <div className="task__info__left__description">{title}</div>
         </div>
         <img

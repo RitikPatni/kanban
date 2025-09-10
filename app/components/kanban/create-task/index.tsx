@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import Modal from "~/components/common/modal";
 import { PRIORITIES } from "~/constants";
+import TagsRow from "~/components/common/modal/tags-row";
 import labelIcon from "~/assets/icons/label.svg";
 import priorityHiIcon from "~/assets/icons/priority-hi.svg";
 import userIcon from "~/assets/icons/user.svg";
@@ -31,8 +32,6 @@ const CreateTask = ({
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [closeModal]);
-  const statusIcon = getStatusIcon(status);
-  const statusTitle = getStatusTitle(status);
   const [formData, setFormData] = useState<ITask>({
     title: "",
     description: "",
@@ -81,24 +80,12 @@ const CreateTask = ({
           }
         ></textarea>
       </form>
-      <div className="create-task__tags">
-        <div className="create-task__tags__tag">
-          <img src={statusIcon} alt={statusTitle} />
-          <span className="create-task__tags__tag__label">{statusTitle}</span>
-        </div>
-        <button className="create-task__tags__tag" type="button">
-          <img src={priorityHiIcon} alt="Priority" />
-          <span className="create-task__tags__tag__label">Priority</span>
-        </button>
-        <button className="create-task__tags__tag" type="button">
-          <img src={userIcon} alt="Assignee" />
-          <span className="create-task__tags__tag__label">Assignee</span>
-        </button>
-        <button className="create-task__tags__tag" type="button">
-          <img src={labelIcon} alt="Label" />
-          <span className="create-task__tags__tag__label">Label</span>
-        </button>
-      </div>
+      <TagsRow
+        status={formData.status}
+        priority={formData.priority}
+        assignee={formData.assignee}
+        labels={formData.labels}
+      />
       <div className="create-task__submit">
         <button
           className="create-task__submit__button"

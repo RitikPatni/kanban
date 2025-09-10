@@ -1,0 +1,14 @@
+.view-task {
+  padding: 0 1.125rem 1rem;
+  color: var(--text-primary);
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+  &__description {
+    font-family: Geist;
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    line-height: 28.8px; // The value is pretty weird so opting to use direct px value
+  }
+}
