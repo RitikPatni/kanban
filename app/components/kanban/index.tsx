@@ -11,9 +11,6 @@ import ViewTask from "./view-task";
 import mockTasks from "./mock";
 
 const Kanban = () => {
-  if (typeof window === "undefined") {
-    return null;
-  }
   const backlogTasks: ITask[] = localStorage.getItem(STATUS_NAME.BACKLOG)
     ? JSON.parse(localStorage.getItem(STATUS_NAME.BACKLOG) || "")
     : [];
