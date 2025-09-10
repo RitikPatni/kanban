@@ -77,32 +77,40 @@ const Kanban = () => {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     const item = active.data.current;
-    if (item && over) {
-      const overStatus = over.id as string;
-      if (item.task.status !== overStatus) {
-        const sourceTasks = localStorage.getItem(item.task.status)
-          ? JSON.parse(localStorage.getItem(item.task.status) || "")
-          : [];
-        const filteredSourceTasks = sourceTasks.filter(
-          (task: ITask) => task.id !== item.task.id
-        );
-        localStorage.setItem(
-          item.task.status,
-          JSON.stringify(filteredSourceTasks)
-        );
-        const destinationTasks = localStorage.getItem(overStatus)
-          ? JSON.parse(localStorage.getItem(overStatus) || "")
-          : [];
-        const updatedTask = { ...item.task, status: overStatus };
-        destinationTasks.push(updatedTask);
-        localStorage.setItem(overStatus, JSON.stringify(destinationTasks));
-        setTasks((prev) => ({
-          ...prev,
-          [item.task.status]: filteredSourceTasks,
-          [overStatus]: destinationTasks,
-        }));
+    if (!item || !over) return;
+
+    const sourceStatus = item.task.status;
+    const destinationStatus = over.id as string;
+    if (sourceStatus === destinationStatus) return;
+
+    const getTasks = (status: string): ITask[] => {
+      try {
+        return JSON.parse(localStorage.getItem(status) || "[]");
+      } catch {
+        return [];
       }
-    }
+    };
+
+    const sourceTasks = getTasks(sourceStatus);
+    const destinationTasks = getTasks(destinationStatus);
+
+    const filteredSourceTasks = sourceTasks.filter(
+      (task: ITask) => task.id !== item.task.id
+    );
+    const updatedTask = { ...item.task, status: destinationStatus };
+    const newDestinationTasks = [...destinationTasks, updatedTask];
+
+    localStorage.setItem(sourceStatus, JSON.stringify(filteredSourceTasks));
+    localStorage.setItem(
+      destinationStatus,
+      JSON.stringify(newDestinationTasks)
+    );
+
+    setTasks((prev) => ({
+      ...prev,
+      [sourceStatus]: filteredSourceTasks,
+      [destinationStatus]: newDestinationTasks,
+    }));
   };
   return (
     <DndContext onDragEnd={handleDragEnd}>

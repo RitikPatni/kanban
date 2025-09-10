@@ -5,6 +5,7 @@
   padding: 1rem;
   display: grid;
   gap: 0.675rem;
+  cursor: grab;
   &__info {
     display: flex;
     justify-content: space-between;
@@ -20,6 +21,8 @@
         color: var(--text-primary);
         font-size: 0.875rem;
         font-weight: 500;
+        word-wrap: break-word;
+        overflow: hidden;
       }
     }
   }
