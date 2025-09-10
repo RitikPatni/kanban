@@ -49,35 +49,35 @@ const Kanban = () => {
           tasks={backlogTasks}
           inStatusTasks={backlogTasks.length}
           totalTasks={totalTasks}
-          onAddTask={() => setShowCreateTask(true)}
+          onAddTask={onAddTask}
         />
         <TaskContainer
           status="todo"
           tasks={todoTasks}
           inStatusTasks={todoTasks.length}
           totalTasks={totalTasks}
-          onAddTask={() => setShowCreateTask(true)}
+          onAddTask={onAddTask}
         />
         <TaskContainer
           status="in-progress"
           tasks={inProgressTasks}
           inStatusTasks={inProgressTasks.length}
           totalTasks={totalTasks}
-          onAddTask={() => setShowCreateTask(true)}
+          onAddTask={onAddTask}
         />
         <TaskContainer
           status="done"
           tasks={doneTasks}
           inStatusTasks={doneTasks.length}
           totalTasks={totalTasks}
-          onAddTask={() => setShowCreateTask(true)}
+          onAddTask={onAddTask}
         />
         <TaskContainer
           status="cancelled"
           tasks={cancelledTasks}
           inStatusTasks={cancelledTasks.length}
           totalTasks={totalTasks}
-          onAddTask={() => setShowCreateTask(true)}
+          onAddTask={onAddTask}
         />
       </section>
       {showCreateTask && (
