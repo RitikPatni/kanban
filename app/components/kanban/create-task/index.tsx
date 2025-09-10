@@ -45,10 +45,16 @@ const CreateTask = ({
     e.preventDefault();
     onAddTaskSubmit(formData);
   };
+  const [fullScreen, setFullScreen] = useState(false);
   return (
     <div className="create-task">
-      <div className="create-task__content">
-        <CreateTaskHeader closeModal={closeModal} />
+      <div
+        className={`create-task__content ${fullScreen ? "create-task__content--fullscreen" : ""}`}
+      >
+        <CreateTaskHeader
+          closeModal={closeModal}
+          setFullScreen={setFullScreen}
+        />
         <form
           className="create-task__form"
           name="create-task-form"
@@ -71,7 +77,7 @@ const CreateTask = ({
             id="description"
             className="create-task__form__textarea"
             placeholder="Description..."
-            rows={4}
+            rows={fullScreen ? 10 : 4}
             required
             onChange={(e) =>
               setFormData({ ...formData, description: e.target.value })
@@ -79,23 +85,21 @@ const CreateTask = ({
           ></textarea>
         </form>
         <div className="create-task__tags">
-          <button className="create-task__tags__button" type="button">
+          <div className="create-task__tags__tag">
             <img src={statusIcon} alt={statusTitle} />
-            <span className="create-task__tags__button__label">
-              {statusTitle}
-            </span>
-          </button>
-          <button className="create-task__tags__button" type="button">
+            <span className="create-task__tags__tag__label">{statusTitle}</span>
+          </div>
+          <button className="create-task__tags__tag" type="button">
             <img src={priorityHiIcon} alt="Priority" />
-            <span className="create-task__tags__button__label">Priority</span>
+            <span className="create-task__tags__tag__label">Priority</span>
           </button>
-          <button className="create-task__tags__button" type="button">
+          <button className="create-task__tags__tag" type="button">
             <img src={userIcon} alt="Assignee" />
-            <span className="create-task__tags__button__label">Assignee</span>
+            <span className="create-task__tags__tag__label">Assignee</span>
           </button>
-          <button className="create-task__tags__button" type="button">
+          <button className="create-task__tags__tag" type="button">
             <img src={labelIcon} alt="Label" />
-            <span className="create-task__tags__button__label">Label</span>
+            <span className="create-task__tags__tag__label">Label</span>
           </button>
         </div>
         <div className="create-task__submit">

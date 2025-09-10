@@ -18,6 +18,10 @@
     box-shadow: var(--shadow-modal);
     animation: fadeIn 0.3s ease;
     width: 100%;
+    &--fullscreen {
+      width: 90%;
+      max-width: none;
+    }
   }
   &__form {
     padding: 0 1.125rem;
@@ -57,7 +61,7 @@
     gap: 0.375rem;
     border-bottom: 1px solid var(--border-modal);
     margin-right: 2.375rem;
-    &__button {
+    &__tag {
       display: flex;
       gap: 0.25rem;
       padding: 0.375rem 0.625rem;
@@ -69,6 +73,7 @@
       border-radius: 0.25rem;
       background: var(--bg-label);
       box-shadow: var(--shadow-label);
+      align-items: center;
       &__label {
         white-space: nowrap;
       }

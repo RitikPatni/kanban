@@ -3,7 +3,13 @@ import "./index.scss";
 import crossIcon from "~/assets/icons/cross.svg";
 import expandIcon from "~/assets/icons/expand.svg";
 
-const CreateTaskHeader = ({ closeModal }: { closeModal: () => void }) => {
+const CreateTaskHeader = ({
+  closeModal,
+  setFullScreen,
+}: {
+  closeModal: () => void;
+  setFullScreen: (value: boolean) => void;
+}) => {
   return (
     <header className="create-task-header">
       <h2 className="create-task-header__title">New Issue</h2>
@@ -12,6 +18,7 @@ const CreateTaskHeader = ({ closeModal }: { closeModal: () => void }) => {
           className="create-task-header__actions__action"
           type="button"
           aria-label="Expand"
+          onClick={() => setFullScreen(true)}
         >
           <img src={expandIcon} alt="Expand" />
         </button>
