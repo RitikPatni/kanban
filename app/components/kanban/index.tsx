@@ -28,20 +28,20 @@ const Kanban = () => {
     ? JSON.parse(localStorage.getItem(STATUS_NAME.CANCELLED) || "")
     : [];
   const [tasks, setTasks] = useState({
-    backlog: backlogTasks,
-    todo: todoTasks,
-    inProgress: inProgressTasks,
-    done: doneTasks,
-    cancelled: cancelledTasks,
+    [STATUS_NAME.BACKLOG]: backlogTasks,
+    [STATUS_NAME.TODO]: todoTasks,
+    [STATUS_NAME.IN_PROGRESS]: inProgressTasks,
+    [STATUS_NAME.DONE]: doneTasks,
+    [STATUS_NAME.CANCELLED]: cancelledTasks,
   });
   const [totalTasks, setTotalTasks] = useState(0);
   useEffect(() => {
     const total =
-      tasks.backlog.length +
-      tasks.todo.length +
-      tasks.inProgress.length +
-      tasks.done.length +
-      tasks.cancelled.length;
+      tasks[STATUS_NAME.BACKLOG].length +
+      tasks[STATUS_NAME.TODO].length +
+      tasks[STATUS_NAME.IN_PROGRESS].length +
+      tasks[STATUS_NAME.DONE].length +
+      tasks[STATUS_NAME.CANCELLED].length;
     setTotalTasks(total);
   }, []);
   const onAddTaskSubmit = (task: ITask) => {
@@ -56,11 +56,11 @@ const Kanban = () => {
       [status]: updatedTasks,
     }));
     const total =
-      tasks.backlog.length +
-      tasks.todo.length +
-      tasks.inProgress.length +
-      tasks.done.length +
-      tasks.cancelled.length;
+      tasks[STATUS_NAME.BACKLOG].length +
+      tasks[STATUS_NAME.TODO].length +
+      tasks[STATUS_NAME.IN_PROGRESS].length +
+      tasks[STATUS_NAME.DONE].length +
+      tasks[STATUS_NAME.CANCELLED].length;
     setTotalTasks(total);
 
     setShowCreateTask(false);
@@ -109,36 +109,36 @@ const Kanban = () => {
       <section className="kanban">
         <TaskContainer
           status={STATUS_NAME.BACKLOG}
-          tasks={backlogTasks}
-          inStatusTasks={backlogTasks.length}
+          tasks={tasks[STATUS_NAME.BACKLOG]}
+          inStatusTasks={tasks[STATUS_NAME.BACKLOG].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
         />
         <TaskContainer
           status={STATUS_NAME.TODO}
-          tasks={todoTasks}
-          inStatusTasks={todoTasks.length}
+          tasks={tasks[STATUS_NAME.TODO]}
+          inStatusTasks={tasks[STATUS_NAME.TODO].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
         />
         <TaskContainer
           status={STATUS_NAME.IN_PROGRESS}
-          tasks={inProgressTasks}
-          inStatusTasks={inProgressTasks.length}
+          tasks={tasks[STATUS_NAME.IN_PROGRESS]}
+          inStatusTasks={tasks[STATUS_NAME.IN_PROGRESS].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
         />
         <TaskContainer
           status={STATUS_NAME.DONE}
-          tasks={doneTasks}
-          inStatusTasks={doneTasks.length}
+          tasks={tasks[STATUS_NAME.DONE]}
+          inStatusTasks={tasks[STATUS_NAME.DONE].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
         />
         <TaskContainer
           status={STATUS_NAME.CANCELLED}
-          tasks={cancelledTasks}
-          inStatusTasks={cancelledTasks.length}
+          tasks={tasks[STATUS_NAME.CANCELLED]}
+          inStatusTasks={tasks[STATUS_NAME.CANCELLED].length}
           totalTasks={totalTasks}
           onAddTask={onAddTask}
         />
