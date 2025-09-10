@@ -1,30 +1,35 @@
 import "./index.scss";
 
-import Header, { type Title } from "./header";
-import Task, { type ITaskProps } from "./task";
+import type { ITask, TaskStatus } from "~/types";
+
+import Header from "./header";
+import Task from "./task";
 import { useDroppable } from "@dnd-kit/core";
 
 export interface ITaskContainerProps {
-  title: Title;
+  status: TaskStatus;
   inStatusTasks?: number;
-  tasks?: ITaskProps[];
+  tasks?: ITask[];
   totalTasks?: number;
+  onAddTask: (task: TaskStatus) => void;
 }
 const TaskContainer = ({
-  title,
+  status,
   inStatusTasks,
   tasks,
   totalTasks,
+  onAddTask,
 }: ITaskContainerProps) => {
   const { setNodeRef: setDroppableRef } = useDroppable({
-    id: `droppable-${title}`,
+    id: `droppable-${status}`,
   });
   return (
     <div className="task-container">
       <Header
-        title={title}
+        status={status}
         inStatusTasks={inStatusTasks}
         totalTasks={totalTasks}
+        onAddTask={onAddTask}
       />
       <div className="task-container__tasks" ref={setDroppableRef}>
         {tasks?.map((task, index) => (

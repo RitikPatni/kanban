@@ -1,18 +1,12 @@
 import "./index.scss";
 
 import { CSS } from "@dnd-kit/utilities";
+import type { ITask } from "~/types";
 import priorityMedIcon from "~/assets/icons/priority-med.svg";
 import { useDraggable } from "@dnd-kit/core";
 import userGrayIcon from "~/assets/icons/user-gray.svg";
 
-export type Priority = "low" | "med" | "high";
-export interface ITaskProps {
-  title: string;
-  description: string;
-  priority: Priority;
-  assignee: string;
-}
-const Task = ({ title, description, priority, assignee }: ITaskProps) => {
+const Task = ({ title, description, priority, assignee }: ITask) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: title,
   });

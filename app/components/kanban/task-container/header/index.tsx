@@ -1,47 +1,35 @@
 import "./index.scss";
 
-import backlogIcon from "~/assets/icons/backlog.svg";
-import cancelledIcon from "~/assets/icons/cancelled.svg";
-import doneIcon from "~/assets/icons/done.svg";
-import inProgressIcon from "~/assets/icons/in-progress.svg";
+import { getStatusIcon, getStatusTitle } from "~/utilities";
+
+import type { TaskStatus } from "~/types";
 import overflowIcon from "~/assets/icons/overflow.svg";
 import plusIcon from "~/assets/icons/plus.svg";
-import todoIcon from "~/assets/icons/todo.svg";
 
-export type Title = "Backlog" | "Cancelled" | "Done" | "In Progress" | "Todo";
 export interface IHeaderProps {
-  title: Title;
+  status: TaskStatus;
   totalTasks?: number;
   inStatusTasks?: number;
+  onAddTask: (task: TaskStatus) => void;
 }
-const Header = ({ title, inStatusTasks, totalTasks }: IHeaderProps) => {
-  const getStatusIcon = (title: Title) => {
-    switch (title) {
-      case "Backlog":
-        return backlogIcon;
-      case "Cancelled":
-        return cancelledIcon;
-      case "Done":
-        return doneIcon;
-      case "In Progress":
-        return inProgressIcon;
-      case "Todo":
-        return todoIcon;
-      default:
-        return null;
-    }
-  };
-  const statusIcon = getStatusIcon(title);
+const Header = ({
+  status,
+  inStatusTasks,
+  totalTasks,
+  onAddTask,
+}: IHeaderProps) => {
+  const statusIcon = getStatusIcon(status);
+  const statusTitle = getStatusTitle(status);
 
   return (
     <header className="header">
       <div className="header__info">
         {statusIcon ? (
           <div className="header__info__icon">
-            <img src={statusIcon} alt={`${title} Icon`} />
+            <img src={statusIcon} alt={`${statusTitle} Icon`} />
           </div>
         ) : null}
-        <div className="header__info__title">{title}</div>
+        <div className="header__info__title">{statusTitle}</div>
         <div className="header__info__status">
           {inStatusTasks ? (
             <>
@@ -59,6 +47,7 @@ const Header = ({ title, inStatusTasks, totalTasks }: IHeaderProps) => {
           className="header__actions__action"
           aria-label="Add Task"
           type="button"
+          onClick={() => onAddTask(status)}
         >
           <img src={plusIcon} alt="Add Task" />
         </button>

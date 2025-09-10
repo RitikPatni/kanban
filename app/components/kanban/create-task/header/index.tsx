@@ -3,7 +3,7 @@ import "./index.scss";
 import crossIcon from "~/assets/icons/cross.svg";
 import expandIcon from "~/assets/icons/expand.svg";
 
-const CreateTaskHeader = () => {
+const CreateTaskHeader = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <header className="create-task-header">
       <h2 className="create-task-header__title">New Issue</h2>
@@ -19,6 +19,7 @@ const CreateTaskHeader = () => {
           className="create-task-header__actions__action"
           type="button"
           aria-label="Close"
+          onClick={closeModal}
         >
           <img src={crossIcon} alt="Close" />
         </button>
