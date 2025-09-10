@@ -5,6 +5,7 @@ import { getStatusIcon, getStatusTitle } from "~/utilities";
 import { useEffect, useState } from "react";
 
 import CreateTaskHeader from "./header";
+import { PRIORITIES } from "~/constants";
 import labelIcon from "~/assets/icons/label.svg";
 import priorityHiIcon from "~/assets/icons/priority-hi.svg";
 import userIcon from "~/assets/icons/user.svg";
@@ -35,7 +36,7 @@ const CreateTask = ({
   const [formData, setFormData] = useState<ITask>({
     title: "",
     description: "",
-    priority: "medium",
+    priority: PRIORITIES.MEDIUM,
     status: status,
     assignee: "",
     id: Date.now().toString(),

@@ -1,3 +1,5 @@
+import { STATUS_NAME, TITLES } from "~/constants";
+
 import type { TaskStatus } from "~/types";
 import backlogIcon from "~/assets/icons/backlog.svg";
 import cancelledIcon from "~/assets/icons/cancelled.svg";
@@ -7,15 +9,15 @@ import todoIcon from "~/assets/icons/todo.svg";
 
 export const getStatusIcon = (status: TaskStatus) => {
   switch (status) {
-    case "backlog":
+    case STATUS_NAME.BACKLOG:
       return backlogIcon;
-    case "todo":
+    case STATUS_NAME.TODO:
       return todoIcon;
-    case "in-progress":
+    case STATUS_NAME.IN_PROGRESS:
       return inProgressIcon;
-    case "done":
+    case STATUS_NAME.DONE:
       return doneIcon;
-    case "cancelled":
+    case STATUS_NAME.CANCELLED:
       return cancelledIcon;
     default:
       return "";
@@ -23,16 +25,16 @@ export const getStatusIcon = (status: TaskStatus) => {
 };
 export const getStatusTitle = (status: TaskStatus) => {
   switch (status) {
-    case "backlog":
-      return "Backlog";
-    case "todo":
-      return "Todo";
-    case "in-progress":
-      return "In Progress";
-    case "done":
-      return "Done";
-    case "cancelled":
-      return "Cancelled";
+    case STATUS_NAME.BACKLOG:
+      return TITLES[STATUS_NAME.BACKLOG];
+    case STATUS_NAME.TODO:
+      return TITLES[STATUS_NAME.TODO];
+    case STATUS_NAME.IN_PROGRESS:
+      return TITLES[STATUS_NAME.IN_PROGRESS];
+    case STATUS_NAME.DONE:
+      return TITLES[STATUS_NAME.DONE];
+    case STATUS_NAME.CANCELLED:
+      return TITLES[STATUS_NAME.CANCELLED];
     default:
       return "";
   }
