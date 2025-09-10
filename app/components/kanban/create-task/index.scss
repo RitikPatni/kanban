@@ -1,0 +1,100 @@
+.create-task {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__content {
+    max-width: 50rem;
+    background: var(--bg-tertiary);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-modal);
+    animation: fadeIn 0.3s ease;
+    width: 100%;
+  }
+  &__form {
+    padding: 0 1.125rem;
+    display: grid;
+    &__input {
+      background: none;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+      color: var(--text-primary);
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    &__textarea {
+      background: none;
+      resize: none;
+      border: none;
+      font-family: Geist;
+      color: var(--text-primary);
+      font-size: 0.75rem;
+      line-height: 28.8px; // The value is pretty weird so opting to use direct px value
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        color: var(--text-modal-placeholder);
+      }
+    }
+  }
+  &__tags {
+    padding: 0.375rem 0 0.875rem 0.75rem;
+    display: flex;
+    gap: 0.375rem;
+    border-bottom: 1px solid var(--border-modal);
+    margin-right: 2.375rem;
+    &__button {
+      display: flex;
+      gap: 0.25rem;
+      padding: 0.375rem 0.625rem;
+      background: none;
+      border: none;
+      color: var(--text-label);
+      font-size: 0.75rem;
+      border: 1px solid var(--border-label);
+      border-radius: 0.25rem;
+      background: var(--bg-label);
+      box-shadow: var(--shadow-label);
+    }
+  }
+  &__submit {
+    display: flex;
+    justify-content: end;
+    padding: 0.75rem;
+    &__button {
+      background: var(--bg-button);
+      border: none;
+      color: var(--text-white);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.375rem 0.875rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-button);
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

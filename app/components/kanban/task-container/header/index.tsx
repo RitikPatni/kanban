@@ -45,7 +45,10 @@ const Header = ({ title, inStatusTasks, totalTasks }: IHeaderProps) => {
         <div className="header__info__status">
           {inStatusTasks ? (
             <>
-              <span>{inStatusTasks || 0}</span>/{" "}
+              <span className="header__info__status__in-progress">
+                {inStatusTasks || 0}
+              </span>
+              /{" "}
             </>
           ) : null}
           {totalTasks || 0}

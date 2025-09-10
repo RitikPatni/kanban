@@ -1,5 +1,6 @@
 import "./index.scss";
 
+import CreateTask from "./create-task";
 import { DndContext } from "@dnd-kit/core";
 import type { ITaskProps } from "./task-container/task";
 import TaskContainer from "./task-container";
@@ -58,6 +59,7 @@ const Kanban = ({
           totalTasks={totalTasks}
         />
       </section>
+      <CreateTask />
     </DndContext>
   );
 };
