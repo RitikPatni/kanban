@@ -1,87 +1,113 @@
-# Welcome to React Router!
+# Kanban Board
 
-A modern, production-ready template for building full-stack React applications using React Router.
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+A simple Kanban board application built with React and TypeScript. It allows users to manage tasks across different stages: Backlog, In Progress, Completed, and Cancelled. Tasks are stored in the browser's local storage for persistence. You can test the application [here](https://kanban.ritikpatni.me/).
 
 ## Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- Add new tasks with a title and description.
+- Drag and drop tasks between different stages.
+- Tasks are saved in local storage to retain state across sessions.
 
 ## Getting Started
 
-### Installation
+### Prerequisites
 
-Install the dependencies:
+- Node.js (v14 or later)
+- npm or yarn
+
+### Installation
 
 ```bash
 npm install
+# or
+yarn install
 ```
 
-### Development
-
-Start the development server with HMR:
+### Running the Application
 
 ```bash
-npm run dev
+npm start
+# or
+yarn start
 ```
 
-Your application will be available at `http://localhost:5173`.
+Open your browser and navigate to `http://localhost:5173` to view the application.
 
-## Building for Production
-
-Create a production build:
+### Building for Production
 
 ```bash
 npm run build
+# or
+yarn build
 ```
 
-## Deployment
+The production-ready files will be in the `build` directory.
 
-### Docker Deployment
+## Technologies Used
 
-To build and run using Docker:
+- React
+- TypeScript
+- dnd-kit for drag-and-drop functionality
+- CSS(SASS) for styling
+- Local Storage for data persistence
 
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+## Folder Structure
 
 ```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+/src
+  /app
+    /assets
+    /components
+      /kanban
+        - index.tsx
+        - index.scss
+        /create-task
+          - index.tsx
+          - index.scss
+        /mock
+          - index.ts
+        /task-container
+          - index.tsx
+          - index.scss
+          /header
+            - index.tsx
+            - index.scss
+          /task
+            - index.tsx
+            - index.scss
+        /view-task
+          - index.tsx
+          - index.scss
+      /common
+        /modal
+          - index.tsx
+          - index.scss
+        /header
+          - index.tsx
+          - index.scss
+        /tags-row
+          - index.tsx
+          - index.scss
+    /constants
+      - index.ts
+    /types
+      - index.ts
+    /utilities
+      - index.ts
+    /routes
+      - home.tsx
+    - root.tsx
+    - routes.ts
 ```
 
-## Styling
+## Scope for Improvement
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+- Add workflows for adding assignee, labels, and priority.
+- Add Markdown support for task descriptions.
+- Allow editing and deleting tasks.
+- Update the favicon and add a logo.
+- Add Light theme support.
 
----
+## Working URL
 
-Built with ❤️ using React Router.
+You can test the application [https://kanban.ritikpatni.me](https://kanban.ritikpatni.me/).

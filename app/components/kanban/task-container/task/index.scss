@@ -20,6 +20,7 @@
         border: none;
         padding: 0;
         display: flex;
+        width: max-content;
       }
       &__description {
         color: var(--text-primary);
